@@ -16,7 +16,14 @@ $submit.on("click", function(event){
 
     // AJAX request
     var apiKey = "5dec8c645acb4bf246d950b6137af75e";
-    var queryURL = `api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
+    var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
     console.log(queryURL);
+
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).then(function(response){
+        console.log(response);
+    });
     
 });
