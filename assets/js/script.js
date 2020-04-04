@@ -46,7 +46,7 @@ $submit.on("click", function(event){
 
 
         // AJAX request for UV index
-        var uvURL = `http://api.openweathermap.org/data/2.5/uvi?appid=${apiKey}&lat=${latitude}&lon=${longitude}`;
+        var uvURL = `https://api.openweathermap.org/data/2.5/uvi?appid=${apiKey}&lat=${latitude}&lon=${longitude}`;
 
         $.ajax({
             url: uvURL,
@@ -65,5 +65,19 @@ $submit.on("click", function(event){
 
     });
 
-    
+    // Ajax request for 5-day
+    var fiveDayURL = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=imperial&appid=${apiKey}`
+
+    $.ajax({
+        url: fiveDayURL,
+        method: "GET"
+    }).then(function(fiveDayRes){
+        console.log(fiveDayRes);
+        console.log(typeof fiveDayRes.list); // this is an array
+        console.log(fiveDayRes.list[0].main.temp);  // this gets the temperature
+        console.log(fiveDayRes.list[0].main.humidity);  // this gets the humidity
+        console.log(fiveDayRes.list[0].dt_txt);  // this gets the date
+    })
+
+
 });
