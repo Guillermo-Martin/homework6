@@ -17,7 +17,7 @@ $submit.on("click", function(event){
     // AJAX request for main weather
     var apiKey = "5dec8c645acb4bf246d950b6137af75e";
     var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=imperial&appid=${apiKey}`;
-    console.log(queryURL);
+    // console.log(queryURL);
 
     $.ajax({
         url: queryURL,
@@ -25,19 +25,24 @@ $submit.on("click", function(event){
     }).then(function(response){
         // console.log(response);
 
-        // city:  console.log(response.name);
+        // Gathering current weather data
         var searchedCity = response.name;
-        // current temp:  console.log(response.main.temp);
         var currentTemp = response.main.temp;
-        // current humidity:  console.log(response.main.humidity);
         var currentHumidity = response.main.humidity;
-        // current wind speed console.log(response.wind.speed);
         var currentWind = response.wind.speed;
-        // longitude for uv index:  console.log(response.coord.lon);
         var longitude = response.coord.lon;
-        // latitude for uv index:  console.log(response.coord.lat);
         var latitude = response.coord.lat;
         
+        // Displaying current weather data in html
+        var $searchedCity = $('#searched-city');
+        var $currentTemp = $('#current-temp');
+        var $currentHumidity = $('#current-humidity');
+        var $currentWind = $('#current-wind');
+
+        $searchedCity.text(searchedCity);
+        $currentTemp.text(currentTemp);
+        $currentHumidity.text(currentHumidity);
+        $currentWind.text(currentWind);
 
 
         // AJAX request for UV index
@@ -49,11 +54,16 @@ $submit.on("click", function(event){
         }).then(function(uvResponse){
             // console.log(uvResponse);
 
-            // uv index:  console.log(uvResponse.value)
+            // Getting UV index
             var uvIndex = uvResponse.value;
 
+            // Displaying UV index in html
+            var $currentUV = $('#uv-index');
+            $currentUV.text(uvIndex);
         });
-    
+
+
     });
+
     
 });
