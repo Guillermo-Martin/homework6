@@ -2,7 +2,8 @@
 var $submit = $('#submit');
 var $city = $('#city');
 
-
+// Store search history
+var searchHistory = [];
 
 
 // Submit button
@@ -12,7 +13,11 @@ $submit.on("click", function(event){
     // get city name
     // URI encode:  https://www.sitepoint.com/jquery-decode-url-string/
     var cityName = encodeURIComponent($city.val().trim());
-    console.log(cityName);
+    // console.log(cityName);
+
+    // Push city into searchHistory array
+    searchHistory.push(cityName);
+    console.log(searchHistory);
 
     // AJAX request for main weather
     var apiKey = "5dec8c645acb4bf246d950b6137af75e";
