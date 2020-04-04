@@ -73,10 +73,25 @@ $submit.on("click", function(event){
         method: "GET"
     }).then(function(fiveDayRes){
         console.log(fiveDayRes);
-        console.log(typeof fiveDayRes.list); // this is an array
-        console.log(fiveDayRes.list[0].main.temp);  // this gets the temperature
-        console.log(fiveDayRes.list[0].main.humidity);  // this gets the humidity
-        console.log(fiveDayRes.list[0].dt_txt);  // this gets the date
+        // console.log(typeof fiveDayRes.list); // this is an array
+
+        // Gathering five day data
+        var fiveDayDate = fiveDayRes.list[0].dt_txt;
+        var fiveDayTemp = fiveDayRes.list[0].main.temp;
+        var fiveDayHumidity = fiveDayRes.list[0].main.humidity;
+
+        // Displaying five day data in html
+        var $fiveDayDate = $('#five-day-date');
+        var $fiveDayTemp = $('#five-day-temp');
+        var $fiveDayHumidity = $('#five-day-humidity');
+
+        $fiveDayDate.text(fiveDayDate);
+        $fiveDayTemp.text(fiveDayTemp);
+        $fiveDayHumidity.text(fiveDayHumidity);
+        
+        
+
+        
     })
 
 
