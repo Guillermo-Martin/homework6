@@ -65,9 +65,10 @@ $submit.on("click", function(event){
         var $currentWind = $('#current-wind');
 
         $searchedCity.text(searchedCity);
-        $currentTemp.text(currentTemp);
-        $currentHumidity.text(currentHumidity);
-        $currentWind.text(currentWind);
+        // Unicode:  https://www.compart.com/en/unicode/U+2109
+        $currentTemp.text("Current Temperature: " + currentTemp + " ℉");
+        $currentHumidity.text("Current Humidity: " + currentHumidity + "%");
+        $currentWind.text("Wind Speed: " + currentWind + " MPH");
 
 
         // AJAX request for UV index
@@ -84,7 +85,7 @@ $submit.on("click", function(event){
 
             // Displaying UV index in html
             var $currentUV = $('#uv-index');
-            $currentUV.text(uvIndex);
+            $currentUV.text("UV Index: " + uvIndex);
         });
 
 
