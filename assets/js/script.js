@@ -112,8 +112,8 @@ $submit.on("click", function(event){
         var $fiveDayHumidity = $('#five-day-humidity');
 
         $fiveDayDate.text(fiveDayDate);
-        $fiveDayTemp.text(fiveDayTemp);
-        $fiveDayHumidity.text(fiveDayHumidity);
+        $fiveDayTemp.text("Temperature: " + fiveDayTemp + " ℉");
+        $fiveDayHumidity.text("Humidity: " + fiveDayHumidity + "%");
         
         
 
