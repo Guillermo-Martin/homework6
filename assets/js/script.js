@@ -1,15 +1,32 @@
 // Targeting HTML elements
 var $submit = $('#submit');
 var $city = $('#city');
+var $searchHistory = $('#searchHistory');
 
 // Store search history
 var searchHistory = [];
+
+// check local storage
+searchHistory = JSON.parse(localStorage.getItem("history"));
+if(searchHistory !== null){
+    for(var i = 0; i < searchHistory.length; i++){
+        // create p element
+        var $pEl = $('<p>');
+        // change text of p element
+        $pEl.text(searchHistory[i]);
+        // append to div
+        $searchHistory.append($pEl);
+    }   
+} else {
+    searchHistory = [];
+}
+
 
 
 // Submit button
 $submit.on("click", function(event){
     event.preventDefault();
-    
+
     // get city name
     // URI encode:  https://www.sitepoint.com/jquery-decode-url-string/
     var cityName = encodeURIComponent($city.val().trim());
@@ -18,6 +35,9 @@ $submit.on("click", function(event){
     // Push city into searchHistory array
     searchHistory.push(cityName);
     console.log(searchHistory);
+
+    // Save cities array into local storage
+    localStorage.setItem("history", JSON.stringify(searchHistory));
 
     // AJAX request for main weather
     var apiKey = "5dec8c645acb4bf246d950b6137af75e";
