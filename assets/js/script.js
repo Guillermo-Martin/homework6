@@ -100,20 +100,70 @@ $submit.on("click", function(event){
     }).then(function(fiveDayRes){
         console.log(fiveDayRes);
         // console.log(typeof fiveDayRes.list); // this is an array
+        var $fiveDayForecast = $('#fiveDayForecast');
 
-        // Gathering five day data
-        var fiveDayDate = fiveDayRes.list[0].dt_txt;
-        var fiveDayTemp = fiveDayRes.list[0].main.temp;
-        var fiveDayHumidity = fiveDayRes.list[0].main.humidity;
+        // Create a card component
+        var $card = $('<div>');
+        $card.addClass('card');
+        $card.attr('style', 'width: 18rem');
+        // append to div
+        $fiveDayForecast.append($card);
 
-        // Displaying five day data in html
-        var $fiveDayDate = $('#five-day-date');
-        var $fiveDayTemp = $('#five-day-temp');
-        var $fiveDayHumidity = $('#five-day-humidity');
+        var $cardBody = $('<div>');
+        $cardBody.addClass('card-body');
+        $card.append($cardBody);
 
-        $fiveDayDate.text(fiveDayDate);
-        $fiveDayTemp.text("Temperature: " + fiveDayTemp + " ℉");
-        $fiveDayHumidity.text("Humidity: " + fiveDayHumidity + "%");
+        var $cardTitle = $('<h5>');
+        $cardTitle.addClass('card-title');
+        $cardBody.append($cardTitle);
+        $cardTitle.text("Card Title");
+
+        var $cardSubtitle = $('<h6>');
+        $cardSubtitle.addClass('card-subtitle mb-2 text-muted');
+        $cardBody.append($cardSubtitle);
+        $cardSubtitle.text("Card Subtitle");
+
+        var $cardText = $('<p>');
+        $cardText.addClass('card-text');
+        $cardBody.append($cardText);
+        $cardText.text("Hello");
+
+        
+
+
+        
+
+
+        // Create an element to go into the div
+        // var $fiveDayDate = $('<div>');
+        // var $fiveDayTemp = $('<div>');
+        // var $fiveDayHumidity = $('<div>');
+
+        // // Append to div
+        // $fiveDayForecast.append($fiveDayDate);
+        // $fiveDayForecast.append($fiveDayTemp);
+        // $fiveDayForecast.append($fiveDayHumidity);
+
+        //     // Gathering five day data
+        //     var fiveDayDate = fiveDayRes.list[0].dt_txt;
+        //     var fiveDayTemp = fiveDayRes.list[0].main.temp;
+        //     var fiveDayHumidity = fiveDayRes.list[0].main.humidity;
+
+
+            
+
+            // Displaying five day data in html
+            // var $fiveDayDate = $('#five-day-date');
+            // var $fiveDayTemp = $('#five-day-temp');
+            // var $fiveDayHumidity = $('#five-day-humidity');
+
+            // Display text
+            // $fiveDayDate.text(fiveDayDate);
+            // $fiveDayTemp.text("Temperature: " + fiveDayTemp + " ℉");
+            // $fiveDayHumidity.text("Humidity: " + fiveDayHumidity + "%");
+
+            // console.log($fiveDayDate.text(fiveDayDate));
+        
         
         
 
