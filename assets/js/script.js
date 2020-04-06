@@ -9,14 +9,26 @@ var searchHistory = [];
 // check local storage
 searchHistory = JSON.parse(localStorage.getItem("history"));
 if(searchHistory !== null){
+
+    // create a ul element and append to search history
+    var $ulEl = $('<ul>');
+    $ulEl.attr('id', 'cityHistory');
+    $searchHistory.append($ulEl);
+
+    // create a button for every city in local storage (searchHistory array)
     for(var i = 0; i < searchHistory.length; i++){
-        // create p element
-        var $pEl = $('<p>');
-        // change text of p element
-        $pEl.text(searchHistory[i]);
-        // append to div
-        $searchHistory.append($pEl);
+        // create an li
+        var $liEl = $('<li>');
+        // append to ul
+        $ulEl.append($liEl);
+        // create button
+        var $button = $('<button>');
+        // append to li
+        $liEl.append($button);
+        // change button text
+        $button.text(searchHistory[i]);
     }   
+
 } else {
     searchHistory = [];
 }
