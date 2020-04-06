@@ -86,6 +86,25 @@ $submit.on("click", function(event){
             // Displaying UV index in html
             var $currentUV = $('#uv-index');
             $currentUV.text("UV Index: " + uvIndex);
+
+            // color coordinate uv index
+            // console.log(uvIndex)
+            // change background color using jquery:  https://stackoverflow.com/questions/4283141/jquery-change-background-color
+            if(uvIndex <= 2){
+                // alert("between 0 and 2");
+                $currentUV.css("background-color", "green");
+                $currentUV.css("color", "white");
+            } else if (uvIndex <= 5) {
+                // alert("between 0 and 5");
+                $currentUV.css("background-color", "orange");
+                $currentUV.css("color", "white");
+            } else {
+                // alert("uv is extreme!");
+                $currentUV.css("background-color", "red");
+                $currentUV.css("color", "white");
+            }
+
+
         });
 
 
@@ -102,31 +121,44 @@ $submit.on("click", function(event){
         // console.log(typeof fiveDayRes.list); // this is an array
         var $fiveDayForecast = $('#fiveDayForecast');
 
-        // Create a card component
-        var $card = $('<div>');
-        $card.addClass('card');
-        $card.attr('style', 'width: 18rem');
-        // append to div
-        $fiveDayForecast.append($card);
+        for(var j = 0; j < 5; j++){
+            // Gather five day data
+            var fiveDayDate = fiveDayRes.list[j].dt_txt;
+            var fiveDayTemp = fiveDayRes.list[j].main.temp;
+            var fiveDayHumidity = fiveDayRes.list[j].main.humidity;
 
-        var $cardBody = $('<div>');
-        $cardBody.addClass('card-body');
-        $card.append($cardBody);
+            // Create a card component
+            var $card = $('<div>');
+            $card.addClass('card');
+            $card.attr('style', 'width: 18rem');
+            // append to div
+            $fiveDayForecast.append($card);
 
-        var $cardTitle = $('<h5>');
-        $cardTitle.addClass('card-title');
-        $cardBody.append($cardTitle);
-        $cardTitle.text("Card Title");
+            var $cardBody = $('<div>');
+            $cardBody.addClass('card-body');
+            $card.append($cardBody);
 
-        var $cardSubtitle = $('<h6>');
-        $cardSubtitle.addClass('card-subtitle mb-2 text-muted');
-        $cardBody.append($cardSubtitle);
-        $cardSubtitle.text("Card Subtitle");
+            var $cardTitle = $('<h5>');
+            $cardTitle.addClass('card-title');
+            $cardBody.append($cardTitle);
+            $cardTitle.text("Date: " + fiveDayDate);
 
-        var $cardText = $('<p>');
-        $cardText.addClass('card-text');
-        $cardBody.append($cardText);
-        $cardText.text("Hello");
+            var $cardSubtitle = $('<h6>');
+            $cardSubtitle.addClass('card-subtitle mb-2 text-muted');
+            $cardBody.append($cardSubtitle);
+            $cardSubtitle.text("Temperature: " + fiveDayTemp + " ℉");
+
+            var $cardText = $('<p>');
+            $cardText.addClass('card-text');
+            $cardBody.append($cardText);
+            $cardText.text("Humidity: " + fiveDayHumidity + "%");
+
+            // Gather five day data
+            var fiveDayDate = fiveDayRes.list[j].dt_txt;
+            var fiveDayTemp = fiveDayRes.list[j].main.temp;
+            var fiveDayHumidity = fiveDayRes.list[j].main.humidity;
+        }
+        
 
         
 
