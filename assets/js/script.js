@@ -63,8 +63,57 @@ $submit.on("click", function(event){
     // URI encode:  https://www.sitepoint.com/jquery-decode-url-string/
     cityName = encodeURIComponent($city.val().trim());
 
-    // Push city into searchHistory array
-    searchHistory.push(cityName);
+
+    // If the search history array doesn't contain the city inputed, push it into the array
+    if(searchHistory.indexOf(cityName) === -1){
+        searchHistory.push(cityName);
+
+        // .shift() will delete the first item in the array
+        if(searchHistory.length > 10){
+            searchHistory.shift();
+        }
+
+        // empty the array
+        $searchHistory.empty();
+
+        // create a list to display the search history buttons
+        var $ulEl = $('<ul>');
+        $ulEl.attr('id', 'cityHistory');
+        $searchHistory.append($ulEl);
+    
+        // Render the cities from local storage
+        // create a button for every city in local storage (searchHistory array)
+        for(var i = 0; i < searchHistory.length; i++){
+            // create an li
+            var $liEl = $('<li>');
+            // append to ul
+            $ulEl.append($liEl);
+            // create button
+            var $button = $('<button>');
+            $button.attr('type', 'submit');
+            $button.addClass('btn btn-primary')
+            $button.attr('data-city', searchHistory[i]);
+            // append to li
+            $liEl.append($button);
+            // change button text
+            $button.text(searchHistory[i]);
+            // add event listener
+            $button.on("click", function(){
+                
+                // =========== AJAX REQUESTS ==============
+                cityName = $(this).attr('data-city');
+                // console.log(cityName);
+                
+                // get current weather
+                currentWeather();
+    
+                // get five day weather
+                fiveDayWeather();
+            });
+            
+        }   
+    }
+    // searchHistory.push(cityName);
     console.log(searchHistory);
 
     // Save cities array into local storage
@@ -92,6 +141,7 @@ function currentWeather(){
         url: queryURL,
         method: "GET"
     }).then(function(response){
+        console.log(response);
 
         // Gathering current weather data
         var searchedCity = response.name;
@@ -161,42 +211,54 @@ function fiveDayWeather(){
         // console.log(typeof fiveDayRes.list); // this is an array
         var $fiveDayForecast = $('#fiveDayForecast');
 
-        for(var j = 0; j < 5; j++){
+        // empty the fiveDayForecast element
+        $fiveDayForecast.empty();
+
+        for(var j = 0; j < fiveDayRes.list.length; j++){
+
+            // check the entire five day weather data for 3:00 weather
+            // the five day weather data has different weather data for different hours of the day
+            // if 3:00 exists, get the date
+            if(fiveDayRes.list[j].dt_txt.indexOf("15:00:00")!== -1){
+                var fiveDayDate = fiveDayRes.list[j].dt_txt;
+                var fiveDayTemp = fiveDayRes.list[j].main.temp;
+                var fiveDayHumidity = fiveDayRes.list[j].main.humidity;
+                
+    
+                // Create a card component
+                var $card = $('<div>');
+                $card.addClass('card');
+                $card.attr('style', 'width: 18rem');
+                // append to div
+                $fiveDayForecast.append($card);
+    
+                var $cardBody = $('<div>');
+                $cardBody.addClass('card-body');
+                $card.append($cardBody);
+    
+                var $cardTitle = $('<h5>');
+                $cardTitle.addClass('card-title');
+                $cardBody.append($cardTitle);
+                $cardTitle.text("Date: " + fiveDayDate);
+    
+                var $cardSubtitle = $('<h6>');
+                $cardSubtitle.addClass('card-subtitle mb-2 text-muted');
+                $cardBody.append($cardSubtitle);
+                $cardSubtitle.text("Temperature: " + fiveDayTemp + " ℉");
+    
+                var $cardText = $('<p>');
+                $cardText.addClass('card-text');
+                $cardBody.append($cardText);
+                $cardText.text("Humidity: " + fiveDayHumidity + "%");
+    
+                // Gather five day data
+                var fiveDayDate = fiveDayRes.list[j].dt_txt;
+                var fiveDayTemp = fiveDayRes.list[j].main.temp;
+                var fiveDayHumidity = fiveDayRes.list[j].main.humidity;
+
+            }
             // Gather five day data
-            var fiveDayDate = fiveDayRes.list[j].dt_txt;
-            var fiveDayTemp = fiveDayRes.list[j].main.temp;
-            var fiveDayHumidity = fiveDayRes.list[j].main.humidity;
-
-            // Create a card component
-            var $card = $('<div>');
-            $card.addClass('card');
-            $card.attr('style', 'width: 18rem');
-            // append to div
-            $fiveDayForecast.append($card);
-
-            var $cardBody = $('<div>');
-            $cardBody.addClass('card-body');
-            $card.append($cardBody);
-
-            var $cardTitle = $('<h5>');
-            $cardTitle.addClass('card-title');
-            $cardBody.append($cardTitle);
-            $cardTitle.text("Date: " + fiveDayDate);
-
-            var $cardSubtitle = $('<h6>');
-            $cardSubtitle.addClass('card-subtitle mb-2 text-muted');
-            $cardBody.append($cardSubtitle);
-            $cardSubtitle.text("Temperature: " + fiveDayTemp + " ℉");
-
-            var $cardText = $('<p>');
-            $cardText.addClass('card-text');
-            $cardBody.append($cardText);
-            $cardText.text("Humidity: " + fiveDayHumidity + "%");
-
-            // Gather five day data
-            var fiveDayDate = fiveDayRes.list[j].dt_txt;
-            var fiveDayTemp = fiveDayRes.list[j].main.temp;
-            var fiveDayHumidity = fiveDayRes.list[j].main.humidity;
+          
         }
     });
 }
