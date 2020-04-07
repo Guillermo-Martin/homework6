@@ -63,7 +63,6 @@ $submit.on("click", function(event){
     // URI encode:  https://www.sitepoint.com/jquery-decode-url-string/
     cityName = encodeURIComponent($city.val().trim());
 
-
     // If the search history array doesn't contain the city inputed, push it into the array
     if(searchHistory.indexOf(cityName) === -1){
         searchHistory.push(cityName);
@@ -145,19 +144,23 @@ function currentWeather(){
 
         // Gathering current weather data
         var searchedCity = response.name;
+        var weatherIcon = (response.weather[0].icon);
         var currentTemp = response.main.temp;
         var currentHumidity = response.main.humidity;
         var currentWind = response.wind.speed;
         var longitude = response.coord.lon;
         var latitude = response.coord.lat;
         
+        
         // Displaying current weather data in html
         var $searchedCity = $('#searched-city');
+        var $weatherIcon = $('#weather-icon');
         var $currentTemp = $('#current-temp');
         var $currentHumidity = $('#current-humidity');
         var $currentWind = $('#current-wind');
 
         $searchedCity.text(searchedCity);
+        $weatherIcon.attr("src", `http://openweathermap.org/img/wn/${weatherIcon}@2x.png`);
         // Unicode:  https://www.compart.com/en/unicode/U+2109
         $currentTemp.text("Current Temperature: " + currentTemp + " ℉");
         $currentHumidity.text("Current Humidity: " + currentHumidity + "%");
