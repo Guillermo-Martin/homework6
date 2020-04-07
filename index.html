@@ -8,11 +8,14 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+    <title>Weather Dashboard</title>
   </head>
   <body>
     <!-- Header -->
-    <h1>Header</h1>
+
+    <nav class="navbar navbar-dark bg-dark mb-5">
+        <span class="navbar-brand mb-0 h1">Weather Dashboard</span>
+    </nav>
 
     <!-- Container -->
     <div class="container">
@@ -32,8 +35,11 @@
                     <button type="submit" class="btn btn-primary" id="submit">Submit</button>
                   </form>
 
+                  <hr>
+
                   <!-- Recent history section -->
-                  <div id="searchHistory">Recent searches goes here.</div>
+                  <h6 id="searchHistory"><span>Recent Searches</span></h6>
+                  
             </div>
 
             <!-- main content: current weather and future forecast -->

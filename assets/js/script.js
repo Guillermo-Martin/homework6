@@ -219,6 +219,11 @@ function fiveDayWeather(){
         // empty the fiveDayForecast element
         $fiveDayForecast.empty();
 
+        // create header
+        var $fiveDayHeader = $('<h3>');
+        $fiveDayHeader.text("5-Day Forecast");
+        $fiveDayForecast.append($fiveDayHeader);
+
         for(var j = 0; j < fiveDayRes.list.length; j++){
 
             // check the entire five day weather data for 3:00 weather
