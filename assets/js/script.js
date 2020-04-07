@@ -90,7 +90,7 @@ $submit.on("click", function(event){
             // create button
             var $button = $('<button>');
             $button.attr('type', 'submit');
-            $button.addClass('btn btn-primary')
+            $button.addClass('btn btn-primary');
             $button.attr('data-city', searchHistory[i]);
             // append to li
             $liEl.append($button);
@@ -238,8 +238,8 @@ function fiveDayWeather(){
     
                 // Create a card component
                 var $card = $('<div>');
-                $card.addClass('card');
-                $card.attr('style', 'width: 18rem');
+                $card.addClass('card w-25');
+                // $card.attr('style', 'width: 18rem');
                 // append to div
                 $fiveDayForecast.append($card);
     
