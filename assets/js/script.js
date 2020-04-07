@@ -150,6 +150,7 @@ function currentWeather(){
         var currentWind = response.wind.speed;
         var longitude = response.coord.lon;
         var latitude = response.coord.lat;
+        var currentDate = moment().format("dddd, MMMM Do YYYY");
         
         
         // Displaying current weather data in html
@@ -159,7 +160,7 @@ function currentWeather(){
         var $currentHumidity = $('#current-humidity');
         var $currentWind = $('#current-wind');
 
-        $searchedCity.text(searchedCity);
+        $searchedCity.text(searchedCity + " (" + currentDate + ")");
         $weatherIcon.attr("src", `http://openweathermap.org/img/wn/${weatherIcon}@2x.png`);
         // Unicode:  https://www.compart.com/en/unicode/U+2109
         $currentTemp.text("Current Temperature: " + currentTemp + " ℉");
