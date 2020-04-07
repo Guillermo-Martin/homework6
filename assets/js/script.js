@@ -211,6 +211,7 @@ function fiveDayWeather(){
         method: "GET"
     }).then(function(fiveDayRes){
         console.log(fiveDayRes);
+        console.log(fiveDayRes.list[4].weather[0].icon);
         // console.log(typeof fiveDayRes.list); // this is an array
         var $fiveDayForecast = $('#fiveDayForecast');
 
@@ -224,6 +225,7 @@ function fiveDayWeather(){
             // if 3:00 exists, get the date
             if(fiveDayRes.list[j].dt_txt.indexOf("15:00:00")!== -1){
                 var fiveDayDate = fiveDayRes.list[j].dt_txt;
+                var fiveDayIcon = fiveDayRes.list[j].weather[0].icon;
                 var fiveDayTemp = fiveDayRes.list[j].main.temp;
                 var fiveDayHumidity = fiveDayRes.list[j].main.humidity;
                 
@@ -243,6 +245,10 @@ function fiveDayWeather(){
                 $cardTitle.addClass('card-title');
                 $cardBody.append($cardTitle);
                 $cardTitle.text("Date: " + fiveDayDate);
+
+                var $fiveDayIcon = $('<img>');
+                $fiveDayIcon.attr("src", `http://openweathermap.org/img/wn/${fiveDayIcon}@2x.png`);
+                $cardBody.append($fiveDayIcon);
     
                 var $cardSubtitle = $('<h6>');
                 $cardSubtitle.addClass('card-subtitle mb-2 text-muted');
