@@ -91,12 +91,12 @@ $submit.on("click", function(event){
             // create button
             var $button = $('<button>');
             $button.attr('type', 'submit');
-            $button.addClass('btn btn-primary');
+            $button.addClass('btn btn-primary btn-block');
             $button.attr('data-city', searchHistory[i]);
             // append to li
             $liEl.append($button);
             // change button text
-            $button.text(searchHistory[i]);
+            $button.text(decodeURI(searchHistory[i]));
             // add event listener
             $button.on("click", function(){
                 
