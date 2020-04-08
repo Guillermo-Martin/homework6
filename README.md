@@ -2,7 +2,7 @@
 
 ## Name and Live URL
     * Weather Dashboard
-    * 
+    * https://guillermo-martin.github.io/homework6/
 ## Description
     * What does the app do?
         * The app gives the current weather and five day forecast for a city of their choice.
