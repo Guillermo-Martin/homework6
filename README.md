@@ -1,46 +1,35 @@
-# 06 Server-Side APIs: Weather Dashboard
+# Homework 6:  Weather Dashboard Readme
 
-Developers are often tasked with retrieving data from another application's API and using it in the context of their own. Third-party APIs allow developers to access their data and functionality by making requests with specific parameters to a URL. Your challenge is to build a weather dashboard that will run in the browser and feature dynamically updated HTML and CSS.
+## Name and Live URL
+    * Weather Dashboard
+    * 
+## Description
+    * What does the app do?
+        * The app gives the current weather and five day forecast for a city of their choice.
+    * How does it work?
+        * When a user types in a city in the input box and clicks on the submit button, the current weather and the five day forecast will display.
+        * The city the user searched for will also appear in a "Recent Searches" section right below the submit button.
+        * The cities in the "Recent Searches" section are also clickable and will display the current weather and five day forecast when clicked.
+        * The app utilizes data obtained through OpenWeather's API and is dynamically created and rendered into the HTML file using JavaScript.
+        * For the UV index, if the index is less than or equal to 2, the UV is favorable and will be displayed as green; if the index is between 3 and 7, the UV is moderate and will be displayed as orange; and if the index is greater than or equal to 8, the UV is extreme and will display as red.
+## Technologies
+    * Languages, frameworks, various tools
+        * HTML, CSS, JavaScript, jQuery, Bootstrap 4, OpenWeather API, and Moment.js.
+## Challenges
+    * Your experience building this app
+        * I had a nice time building this app.  I thought it was neat looking at all the data obtained from OpenWeather's API.
+    * What was difficult
+        * One of the difficult parts I had was getting the five day forecast to display properly.  If another city was searched right after searching a city, the five day forecast would append to the previous five day forecast results.
+        * I also had difficulty limiting the number of searches to appear in the "Recent Searches" section.  The list would keep growing and growing whenever a search was made.  Another issue I had was preventing the same city from showing up in the "Recent Searches" section.
+    * What did you learn
+        * I learned how to better navigate through the data obtained from an API.
+        * I also learned about using "encodeURIComponent()" and "decodeURI()".
+        * I learned about using ".shift()" with arrays.
+        * I also learned that the jQuery version included with Bootstrap 4 doesn't support AJAX requests.
+    * How did you go about solving a problem
+        * I would Google the particular problem or error message I was getting.
+        * I utilized the console to see what issues I was having.
+        * I also attended office hours and worked with a tutor.
+## Screenshot
+    ![homework 6 screenshot](./assets/images/homework6-screenshot.png)
 
-Use the [OpenWeather API](https://openweathermap.org/api) to retrieve weather data for cities. The documentation includes a section called "How to start" that will provide basic setup and usage instructions. Use `localStorage` to store any persistent data.
-
-## User Story
-
-```
-AS A traveler
-I WANT to see the weather outlook for multiple cities
-SO THAT I can plan a trip accordingly
-```
-
-## Acceptance Criteria
-
-```
-GIVEN a weather dashboard with form inputs
-WHEN I search for a city
-THEN I am presented with current and future conditions for that city and that city is added to the search history
-WHEN I view current weather conditions for that city
-THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index
-WHEN I view the UV index
-THEN I am presented with a color that indicates whether the conditions are favorable, moderate, or severe
-WHEN I view future weather conditions for that city
-THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, and the humidity
-WHEN I click on a city in the search history
-THEN I am again presented with current and future conditions for that city
-WHEN I open the weather dashboard
-THEN I am presented with the last searched city forecast
-```
-
-The following image demonstrates the application functionality:
-
-![weather dashboard demo](./Assets/06-server-side-apis-homework-demo.png)
-
-## Review
-
-You are required to submit the following for review:
-
-* The URL of the deployed application.
-
-* The URL of the GitHub repository. Give the repository a unique name and include a README describing the project.
-
-- - -
-© 2019 Trilogy Education Services, a 2U, Inc. brand. All Rights Reserved.

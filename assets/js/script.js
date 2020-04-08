@@ -40,17 +40,14 @@ if(searchHistory !== null){
             
             // =========== AJAX REQUESTS ==============
             cityName = $(this).attr('data-city');
-            // console.log(cityName);
             
             // get current weather
             currentWeather();
 
             // get five day weather
             fiveDayWeather();
-        });
-        
+        });  
     }   
-
 } else {
     searchHistory = [];
 }
@@ -63,6 +60,12 @@ $submit.on("click", function(event){
     // get city name
     // URI encode:  https://www.sitepoint.com/jquery-decode-url-string/
     cityName = encodeURIComponent($city.val().trim());
+
+    // check to see if the input box is empty
+    if(cityName === ""){
+        alert("Please enter a city.");
+        return;
+    }
 
     // If the search history array doesn't contain the city inputed, push it into the array
     if(searchHistory.indexOf(cityName) === -1){
@@ -113,8 +116,6 @@ $submit.on("click", function(event){
             
         }   
     }
-    // searchHistory.push(cityName);
-    console.log(searchHistory);
 
     // Save cities array into local storage
     localStorage.setItem("history", JSON.stringify(searchHistory));
@@ -141,7 +142,6 @@ function currentWeather(){
         url: queryURL,
         method: "GET"
     }).then(function(response){
-        console.log(response);
 
         // Gathering current weather data
         var searchedCity = response.name;
@@ -185,16 +185,14 @@ function currentWeather(){
             $currentUV.text("UV Index: " + uvIndex);
 
             // change background color using jquery:  https://stackoverflow.com/questions/4283141/jquery-change-background-color
+            // UV index scale:  https://www.epa.gov/sunsafety/uv-index-scale-0
             if(uvIndex <= 2){
-                // alert("between 0 and 2");
                 $currentUV.css("background-color", "green");
                 $currentUV.css("color", "white");
-            } else if (uvIndex <= 5) {
-                // alert("between 0 and 5");
+            } else if (uvIndex <= 7) {
                 $currentUV.css("background-color", "orange");
                 $currentUV.css("color", "white");
             } else {
-                // alert("uv is extreme!");
                 $currentUV.css("background-color", "red");
                 $currentUV.css("color", "white");
             }
@@ -212,8 +210,6 @@ function fiveDayWeather(){
         url: fiveDayURL,
         method: "GET"
     }).then(function(fiveDayRes){
-        console.log(fiveDayRes);
-        console.log(fiveDayRes.list[4].weather[0].icon);
         // console.log(typeof fiveDayRes.list); // this is an array
         var $fiveDayForecast = $('#fiveDayForecast');
 
