@@ -1,6 +1,6 @@
 # Weather Dashboard
 
-https://guillermo-martin.github.io/homework6/
+https://guillermo-martin.github.io/weatherDashboard/
 
 ## Description
 <!-- * What does the app do? -->
